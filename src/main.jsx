@@ -138,9 +138,9 @@ function ReferEarn(){
    <button className="terms" onClick={()=>setInfoView('terms')}>Program Terms <img src={assetPath('/assets/refer-hero/link-icon.svg')} alt=""/></button>
   </div>
   <div className="rewardstats">
-   <article><span className="staticon blue"><WalletCards/></span><div><small>Available earnings</small><strong>75 credits</strong><em>≈ {localValue(75)} value</em></div></article>
-   <article><span className="staticon amber"><Clock3/></span><div><small>Pending credits</small><strong>25</strong><em>1 referral validating</em></div></article>
-   <article><span className="staticon purple"><Users/></span><div><small>Successful referrals</small><strong>3</strong><em>4 total invitations</em></div></article>
+   <article><span className="staticon blue"><img src={assetPath('/assets/refer-details/earnings-icon.svg')} alt=""/></span><div><small>Available earnings</small><strong>75 credits</strong><em>≈ {localValue(75)} value</em></div></article>
+   <article><span className="staticon orange"><img src={assetPath('/assets/refer-details/pending-icon.svg')} alt=""/></span><div><small>Pending credits</small><strong>25</strong><em>1 referral validating</em></div></article>
+   <article><span className="staticon green"><img src={assetPath('/assets/refer-details/referrals-icon.svg')} alt=""/></span><div><small>Successful referrals</small><strong>3</strong><em>4 total invitations</em></div></article>
   </div>
   <section className="useearnings">
    <div className="useearningshead"><div><h3>Use your earnings</h3><p>Choose how you want to redeem your available CertSprints Credits.</p></div></div>
