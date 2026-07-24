@@ -148,7 +148,7 @@ function ReferEarn(){
   </section>
   <div className="referralgrid">
    <article className="sharecard">
-    <div className="cardheading"><span className="shareicon"><UserPlus/></span><div><h3>Invite your friends</h3><p>Share your unique referral link anywhere.</p></div><button onClick={share} className="shareprimary"><Share2/>Share invite</button></div>
+    <div className="cardheading"><span className="shareicon"><UserPlus/></span><div><h3>Invite your friends</h3><p>Share your unique referral link anywhere.</p></div><button onClick={share} className="shareprimary"><img src={assetPath('/assets/refer-details/share-button-icon.svg')} alt=""/>Share invite</button></div>
     <label className="referralinput">Your referral link<div><input value={referralUrl} readOnly/><button aria-label="Copy referral link" onClick={copyLink}>{copied?<Check/>:<Copy/>}</button></div></label>
     <p className="regionalnote">Rewards and eligibility may vary by country, currency, and active campaign.</p>
    </article>
