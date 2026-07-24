@@ -71,3 +71,23 @@
  .reviewmain{padding:12px}.referralhero{min-height:280px}.referralhero .terms{font-size:12px}.referralhero .herocopy h2{font-size:19px}
  .activitytitle{display:block}.activitytitle button{margin-top:12px}.redeemintro{align-items:flex-start}.redeemicon{width:42px;height:42px}
 }
+
+/* Responsive product shell */
+.mobilebrand,.mobilescrim{display:none}
+@media(max-width:780px){
+ body{overflow-x:hidden}.app{display:block;min-width:0}.app>main{width:100%;overflow:hidden}
+ .sidebar{display:flex;position:fixed;z-index:40;left:0;top:0;width:min(280px,84vw);height:100dvh;transform:translateX(-105%);transition:transform .22s ease;box-shadow:12px 0 32px #0f172a24}
+ .sidebar.mobileopen{transform:translateX(0)}.mobilescrim{position:fixed;z-index:39;inset:0;width:100%;height:100%;background:#0f172a80}.mobilescrim.open{display:block}
+ .mobilebrand{display:flex;align-items:center;gap:10px;min-width:0}.mobilebrand button{width:38px;height:38px;border:1px solid #e2e8f0;border-radius:6px;display:grid;place-items:center;flex:none}.mobilebrand button svg{width:20px}.mobilebrand img{display:block;width:112px;height:20px;object-fit:contain}
+ .topbar{height:auto;min-height:112px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;gap:10px 12px;background:#fff;border-bottom:1px solid #e2e8f0}
+ .topbar .cert{grid-column:1/-1;grid-row:2;width:100%;height:42px}.topbar .headeractions{grid-column:2;grid-row:1}.headeractions .streak{height:38px}.headeractions .streak b{font-size:11px}
+ .shell{min-height:0;margin:0;padding:20px 16px 32px;border:0;border-radius:0}.heading h1{font-size:21px}.heading p{font-size:13px;line-height:1.5}
+ .content{display:block;margin-top:20px}.settingsnav{margin:0 -16px 18px;padding:0 16px 8px;gap:8px;scrollbar-width:none}.settingsnav::-webkit-scrollbar{display:none}.settingsnav button{height:40px;padding:0 12px;font-size:13px}.settingsnav svg{width:17px}
+ .referralhero{width:100%;min-width:0}.referralhero .herocopy{min-width:0;width:100%}.referralhero .herocopy p{overflow-wrap:anywhere}
+ .rewardstats,.useearnings,.sharecard,.howcard,.activitycard{min-width:0;width:100%}
+ .referralinput>div{min-width:0}.referralinput input{width:0}
+}
+@media(max-width:390px){
+ .topbar{padding:10px 12px}.mobilebrand img{width:104px}.shell{padding:18px 12px 28px}.settingsnav{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}
+ .referralhero{padding-left:14px;padding-right:14px}.referralhero .heroart{left:0}.referralhero .terms{right:12px}
+}

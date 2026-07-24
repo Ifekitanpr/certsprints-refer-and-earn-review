@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {
   Bell, BookOpen, BriefcaseBusiness, CalendarDays, ChevronDown, ChevronRight,
@@ -29,25 +29,28 @@ function Toggle({on,setOn,label}) {
   </button>
 }
 
-function Sidebar(){
-  return <aside className="sidebar">
+function Sidebar({mobileOpen=false,onClose}){
+  return <><button className={'mobilescrim '+(mobileOpen?'open':'')} aria-label="Close primary navigation" onClick={onClose}/><aside className={'sidebar '+(mobileOpen?'mobileopen':'')}>
     <div>
-      <div className="brand"><img className="brandlogo" src={assetPath('/assets/certsprints-logo.svg')} alt="CertSprints"/><button className="collapse">↤</button></div>
-      <nav className="mainnav">{mainNav.map(([label,Icon])=><button key={label} className={label==='Settings'?'active':''}><Icon/><span>{label}</span></button>)}</nav>
+      <div className="brand"><img className="brandlogo" src={assetPath('/assets/certsprints-logo.svg')} alt="CertSprints"/><button className="collapse" onClick={onClose}>↤</button></div>
+      <nav className="mainnav">{mainNav.map(([label,Icon])=><button key={label} className={label==='Settings'?'active':''} onClick={onClose}><Icon/><span>{label}</span></button>)}</nav>
     </div>
     <div className="asidefoot"><button>Help & Support <ExternalLink/></button><button>Resources <ExternalLink/></button></div>
-  </aside>
+  </aside></>
 }
 
-function Topbar(){
+function Topbar({openMobileNav}){
   return <header className="topbar">
+    <div className="mobilebrand"><button aria-label="Open primary navigation" onClick={openMobileNav}><Menu/></button><img src={assetPath('/assets/certsprints-logo.svg')} alt="CertSprints"/></div>
     <button className="cert"><FileBadge2/><span>PMP Project Management Professional</span><ChevronDown/></button>
     <div className="headeractions"><button className="streak"><Flame/><b>123 days</b></button><button><FileBadge2/></button><button><Bell/></button><button><Settings/></button><img src="https://i.pravatar.cc/80?img=12"/><ChevronDown/></div>
   </header>
 }
 
 function SettingsMenu({page,setPage}){
-  return <nav className="settingsnav">{settings.map(([id,label,Icon])=><button className={page===id?'active':''} key={id} onClick={()=>setPage(id)}><Icon/><span>{label}</span></button>)}</nav>
+  const activeItem=useRef(null);
+  useEffect(()=>{activeItem.current?.scrollIntoView({block:'nearest',inline:'center'})},[page]);
+  return <nav className="settingsnav">{settings.map(([id,label,Icon])=><button ref={page===id?activeItem:null} className={page===id?'active':''} key={id} onClick={()=>setPage(id)}><Icon/><span>{label}</span></button>)}</nav>
 }
 
 function Profile({editing,setEditing}){
@@ -294,12 +297,12 @@ function NotifyRow({title,desc,email,push,Icon}){
 
 function App(){
  const referOnly=import.meta.env.VITE_REFER_ONLY==='true';
- if(referOnly) return <div className="reviewapp"><header className="reviewheader"><img src={assetPath('/assets/certsprints-logo.svg')} alt="CertSprints"/><span>Refer &amp; Earn review</span></header><main className="reviewmain"><ReferEarn/></main></div>;
  const hash=location.hash.replace('#','');
- const [page,setPage]=useState(['sounds','notifications','referrals','billing'].includes(hash)?hash:'profile');
+ const [page,setPage]=useState(referOnly?'referrals':(['sounds','notifications','referrals','billing'].includes(hash)?hash:'profile'));
  const [editing,setEditing]=useState(hash==='edit');
+ const [mobileNav,setMobileNav]=useState(false);
  const changePage=p=>{setPage(p); setEditing(false); location.hash=p};
- return <div className="app"><Sidebar/><main><Topbar/><div className="shell">
+ return <div className="app"><Sidebar mobileOpen={mobileNav} onClose={()=>setMobileNav(false)}/><main><Topbar openMobileNav={()=>setMobileNav(true)}/><div className="shell">
   <div className="heading"><h1>Settings</h1><p>Showing a deep dive into your current learning progress</p></div>
   <div className="content"><SettingsMenu page={page} setPage={changePage}/>{page==='profile'?<Profile editing={editing} setEditing={setEditing}/>:page==='sounds'?<Sounds/>:page==='notifications'?<Notifications/>:page==='referrals'?<ReferEarn/>:page==='billing'?<Billing/>:<section className="panel empty"><h2>{settings.find(x=>x[0]===page)?.[1]}</h2><p>This section is ready for your settings.</p></section>}</div>
  </div></main></div>
